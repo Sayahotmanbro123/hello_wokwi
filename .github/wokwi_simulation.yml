@@ -1,0 +1,21 @@
+name: ESP32 Wokwi CI
+
+on: [push, pull_request]
+
+jobs:
+  build_and_simulate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install ESP-IDF and Build
+        uses: espressif/idf-build-action@v2
+        with:
+          esp-idf-version: 'v5.4.1'
+          target: 'esp32'
+
+      - name: Simulate with Wokwi
+        run: |
+          export WOKWI_CLI_TOKEN=${{ secrets.WOKWI_CLI_TOKEN }}
+          idf.py wokwi --timeout 30000 --expect-text "Hello, Wokwi!"
