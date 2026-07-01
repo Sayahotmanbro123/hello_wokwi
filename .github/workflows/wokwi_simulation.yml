@@ -11,11 +11,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Build projek menggunakan Docker Image resmi Espressif (ESP-IDF)
+      # 2. Build projek menggunakan GitHub Action resmi Espressif
       - name: Build ESP-IDF Project
-        uses: espressif/idf-build-action@v1.5
+        uses: espressif/esp-idf-ci-action@v1
         with:
-          esp_idf_version: v5.1 # Sesuaikan dengan versi IDF yang kamu pakai (misal v5.0, v5.1, dll)
+          esp_idf_version: v5.1  # Sesuaikan dengan versi IDF yang kamu pakai
           target: esp32
 
       # 3. Jalankan simulasi dengan Wokwi setelah file .bin berhasil dibuat
